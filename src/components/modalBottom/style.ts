@@ -62,6 +62,12 @@ const style = StyleSheet.create({
     textTransform: 'uppercase',
     fontSize: 10,
   },
+  favoriteContainerRemove: {
+    borderColor: colors.primary,
+  },
+  favoriteTextRemove: {
+    color: colors.primary,
+  },
 });
 
 export default style;

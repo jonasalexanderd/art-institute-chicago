@@ -11,6 +11,8 @@ import {IMAGE_BASE_URL} from '@env';
 // Assets
 import CloseIcon from 'assets/svg/close.svg';
 import FavoriteIcon from 'assets/svg/favorite.svg';
+// Hooks
+import useFavoriteHook from 'src/hooks/useFavoriteHook';
 // Services
 import {ArtWorkInterface} from 'src/services/artworks/interface';
 // Style
@@ -25,6 +27,8 @@ const ModalBottom = ({
   artWork: ArtWorkInterface;
   onClose: () => void;
 }) => {
+  const {addToFavorite, removeToFavorite, favoriteArts} = useFavoriteHook();
+  const isFavorite = favoriteArts.find(el => el.id === artWork.id);
   return (
     <Modal animationType="slide" transparent={true} visible={visible}>
       <View style={modalStyle.container}>
@@ -51,10 +55,25 @@ const ModalBottom = ({
               {artWork.exhibition_history || '-'}
             </Text>
           </ScrollView>
-          <View style={modalStyle.favoriteContainer}>
-            <Text style={modalStyle.favoriteText}>add to favorite</Text>
+          <TouchableOpacity
+            onPress={async () =>
+              isFavorite
+                ? await removeToFavorite(artWork)
+                : await addToFavorite(artWork)
+            }
+            style={[
+              modalStyle.favoriteContainer,
+              isFavorite ? modalStyle.favoriteContainerRemove : null,
+            ]}>
+            <Text
+              style={[
+                modalStyle.favoriteText,
+                isFavorite ? modalStyle.favoriteTextRemove : null,
+              ]}>
+              {isFavorite ? 'remove' : 'add'} to favorite
+            </Text>
             <FavoriteIcon width={20} height={20} />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     </Modal>

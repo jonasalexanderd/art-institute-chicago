@@ -9,6 +9,11 @@ const style = StyleSheet.create({
     backgroundColor: colors.white,
     paddingBottom: 15,
   },
+  backContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
   title: {
     color: colors.dark,
     fontSize: 26,
@@ -51,6 +56,9 @@ const style = StyleSheet.create({
     fontSize: 14,
     paddingHorizontal: 20,
     color: colors.grey,
+  },
+  back: {
+    flex: 0.4,
   },
 });
 

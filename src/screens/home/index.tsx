@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {Text, FlatList, TouchableOpacity, Image, View} from 'react-native';
-import {IMAGE_BASE_URL} from '@env';
+import {Text, FlatList, View} from 'react-native';
 // Assets
 import SearchIcon from 'assets/svg/search.svg';
 // Components
+import ArtItem from 'src/components/artItem';
 import Container from 'src/components/commons/container';
+import FavoriteButton from 'src/components/favoriteButton';
 import Input from 'src/components/commons/input';
 import ModalBottom from 'src/components/modalBottom';
 // Services
@@ -52,25 +53,11 @@ const Home = () => {
         style={homeStyle.flatListContainer}
         data={artWorks}
         renderItem={({item}) => (
-          <TouchableOpacity
-            onPress={() => {
-              setShowArt(true);
-              setArtWorkSelected(item);
-            }}
-            style={homeStyle.itemContainer}>
-            <Image
-              style={homeStyle.imageStyle}
-              source={{
-                uri: `${IMAGE_BASE_URL.replace('{identifier}', item.image_id)}`,
-              }}
-            />
-            <Text style={homeStyle.artTitle} numberOfLines={1}>
-              {item.title}
-            </Text>
-            <Text style={homeStyle.artDescription} numberOfLines={1}>
-              {item.thumbnail.alt_text}
-            </Text>
-          </TouchableOpacity>
+          <ArtItem
+            item={item}
+            setArtWorkSelected={setArtWorkSelected}
+            setShowArt={setShowArt}
+          />
         )}
         keyExtractor={item => item.title}
       />
@@ -84,6 +71,7 @@ const Home = () => {
           artWork={artWorkSelected}
         />
       )}
+      <FavoriteButton />
     </Container>
   );
 };

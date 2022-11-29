@@ -46,6 +46,22 @@ const style = StyleSheet.create({
   descriptionTitle: {
     color: colors.dark,
   },
+  favoriteContainer: {
+    flexDirection: 'row',
+    borderColor: colors.lightGrey,
+    padding: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 20,
+    marginBottom: 20,
+  },
+  favoriteText: {
+    marginRight: 10,
+    textTransform: 'uppercase',
+    fontSize: 10,
+  },
 });
 
 export default style;

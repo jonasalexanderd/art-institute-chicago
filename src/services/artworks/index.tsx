@@ -5,7 +5,6 @@ const getArtWorks = async () => {
   const {
     data: {data},
   } = await axios.get<ArtWorkDataResult>('artworks');
-  console.log(data);
   return data;
 };
 

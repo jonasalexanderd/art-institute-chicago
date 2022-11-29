@@ -10,6 +10,7 @@ import {
 import {IMAGE_BASE_URL} from '@env';
 // Assets
 import CloseIcon from 'assets/svg/close.svg';
+import FavoriteIcon from 'assets/svg/favorite.svg';
 // Services
 import {ArtWorkInterface} from 'src/services/artworks/interface';
 // Style
@@ -50,6 +51,10 @@ const ModalBottom = ({
               {artWork.exhibition_history || '-'}
             </Text>
           </ScrollView>
+          <View style={modalStyle.favoriteContainer}>
+            <Text style={modalStyle.favoriteText}>add to favorite</Text>
+            <FavoriteIcon width={20} height={20} />
+          </View>
         </View>
       </View>
     </Modal>

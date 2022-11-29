@@ -6,6 +6,7 @@ const colors: {[key in colorTypes]: string} = {
   dark: '#222222',
   lightGrey: '#cccccc',
   grey: '#9f9e9e',
+  darkGradient: 'rgba(34,34,34,0.62)',
 };
 
 export default colors;

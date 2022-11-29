@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, FlatList, TouchableOpacity, Image, View} from 'react-native';
 import {IMAGE_BASE_URL} from '@env';
 // Assets
@@ -6,6 +6,7 @@ import SearchIcon from 'assets/svg/search.svg';
 // Components
 import Container from 'src/components/commons/container';
 import Input from 'src/components/commons/input';
+import ModalBottom from 'src/components/modalBottom';
 // Services
 import ArtWorkServices from 'src/services/artworks';
 import {ArtWorkInterface} from 'src/services/artworks/interface';
@@ -13,6 +14,9 @@ import {ArtWorkInterface} from 'src/services/artworks/interface';
 import homeStyle from './style';
 
 const Home = () => {
+  const [showArt, setShowArt] = useState<boolean>(false);
+  const [artWorkSelected, setArtWorkSelected] =
+    useState<null | ArtWorkInterface>(null);
   const [artWorks, setArtWorks] = React.useState<ArtWorkInterface[]>([]);
   React.useEffect(() => {
     ArtWorkServices.getArtWorks().then(setArtWorks);
@@ -48,7 +52,12 @@ const Home = () => {
         style={homeStyle.flatListContainer}
         data={artWorks}
         renderItem={({item}) => (
-          <TouchableOpacity style={homeStyle.itemContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              setShowArt(true);
+              setArtWorkSelected(item);
+            }}
+            style={homeStyle.itemContainer}>
             <Image
               style={homeStyle.imageStyle}
               source={{
@@ -65,6 +74,16 @@ const Home = () => {
         )}
         keyExtractor={item => item.title}
       />
+      {artWorkSelected && (
+        <ModalBottom
+          onClose={() => {
+            setShowArt(false);
+            setArtWorkSelected(null);
+          }}
+          visible={showArt}
+          artWork={artWorkSelected}
+        />
+      )}
     </Container>
   );
 };

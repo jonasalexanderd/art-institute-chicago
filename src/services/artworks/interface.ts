@@ -9,6 +9,9 @@ export interface ArtWorkInterface {
   thumbnail: {
     alt_text: string;
   };
+  artist_display: string;
+  artist_title: string;
+  exhibition_history: string;
 }
 
 export interface ArtWorkDataResult {

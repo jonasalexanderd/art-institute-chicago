@@ -5,6 +5,10 @@ const style = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
   },
+  header: {
+    backgroundColor: colors.white,
+    paddingBottom: 15,
+  },
   title: {
     color: colors.dark,
     fontSize: 26,
@@ -21,6 +25,7 @@ const style = StyleSheet.create({
   },
   flatListContainer: {
     marginTop: 10,
+    paddingHorizontal: 20,
   },
   itemContainer: {
     width: '100%',

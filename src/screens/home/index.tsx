@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, FlatList, TouchableOpacity, Image} from 'react-native';
+import {Text, FlatList, TouchableOpacity, Image, View} from 'react-native';
 import {IMAGE_BASE_URL} from '@env';
 // Assets
 import SearchIcon from 'assets/svg/search.svg';
@@ -13,22 +13,36 @@ import {ArtWorkInterface} from 'src/services/artworks/interface';
 import homeStyle from './style';
 
 const Home = () => {
-  const [searchText, setSearchText] = React.useState<string>('');
   const [artWorks, setArtWorks] = React.useState<ArtWorkInterface[]>([]);
   React.useEffect(() => {
     ArtWorkServices.getArtWorks().then(setArtWorks);
   }, []);
 
+  /**
+   * Get arts by value or not value
+   * @param value
+   */
+  const getArts = async (value: string) => {
+    if (value) {
+      const data = await ArtWorkServices.getArtWorkByQuery(value);
+      setArtWorks(data);
+    } else {
+      const data = await ArtWorkServices.getArtWorks();
+      setArtWorks(data);
+    }
+  };
   return (
-    <Container style={homeStyle.container}>
-      <Text style={homeStyle.title}>
-        Welcome to Art Institute {'\n'} of Chicago
-      </Text>
-      <Input
-        placeholder="Search"
-        icon={<SearchIcon width={20} height={20} color="black" />}
-        onChange={setSearchText}
-      />
+    <Container safeColor="white">
+      <View style={[homeStyle.container, homeStyle.header]}>
+        <Text style={homeStyle.title}>
+          Welcome to Art Institute {'\n'} of Chicago
+        </Text>
+        <Input
+          placeholder="Search"
+          icon={<SearchIcon width={20} height={20} color="black" />}
+          onChange={getArts}
+        />
+      </View>
       <FlatList
         showsVerticalScrollIndicator={false}
         style={homeStyle.flatListContainer}

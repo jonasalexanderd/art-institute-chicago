@@ -6,13 +6,15 @@ import containerStyle from './style';
 const Container = ({
   children,
   style,
+  safeColor,
 }: {
   children: React.ReactNode;
   style?: ViewStyle;
+  safeColor?: string;
 }) => {
   return (
     <View style={[containerStyle.container, style]}>
-      <SafeAreaView />
+      <SafeAreaView style={{backgroundColor: safeColor}} />
       {children}
     </View>
   );

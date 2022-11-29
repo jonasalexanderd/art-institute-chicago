@@ -1,3 +1,3 @@
-type colorTypes = 'primary' | 'white' | 'dark';
+type colorTypes = 'primary' | 'white' | 'dark' | 'lightGrey' | 'grey';
 
 export default colorTypes;
